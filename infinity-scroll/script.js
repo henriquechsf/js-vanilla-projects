@@ -14,12 +14,10 @@ const apiUrl = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&coun
 
 // Check if all images were 30
 function imageLoaded() {
-    console.log('image loaded');
     imagesLoaded++; 30
     if (imagesLoaded === totalImages) {
         ready = true;
         loader.hidden = true;
-        console.log('ready = ', ready);
     }
 }
 
@@ -34,7 +32,6 @@ function setAttributes(element, attributes) {
 function displayPhotos() {
     imagesLoaded = 0;
     totalImages = photosArray.length;
-    console.log('Total images: ', totalImages)
 
     // Run function for each object in PhotosArray
     photosArray.forEach(photo => {
@@ -65,7 +62,7 @@ function displayPhotos() {
 // Get photos from Unspash API
 async function getPhotos() {
     try {
-        loader.hidden = false;
+        //loader.hidden = false;
         const response = await fetch(apiUrl);
         photosArray = await response.json();
         displayPhotos();
@@ -79,7 +76,6 @@ window.addEventListener('scroll', () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 && ready) {
         ready = false;
         getPhotos();
-        console.log('Load more');
     }
 })
 
